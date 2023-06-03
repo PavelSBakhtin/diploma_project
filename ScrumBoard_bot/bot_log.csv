@@ -1,2 +1,5 @@
-2023-06-03 14:44:04,706: INFO _welcome-362 Bot: scrum_board_bot [@ScrumBoard_bot]
-2023-06-03 14:44:04,706: INFO start_polling-358 Start polling.
+2023-06-03 15:03:30,564: INFO _welcome-362 Bot: scrum_board_bot [@ScrumBoard_bot]
+2023-06-03 15:03:30,565: INFO start_polling-358 Start polling.
+2023-06-03 15:03:31,542: INFO start_handler-25 user_id=2063273849 user_bot=False user_message='/start'
+2023-06-03 15:03:58,010: INFO stop_polling-433 Stop polling...
+2023-06-03 15:03:58,011: WARNING start_polling-329 Goodbye!

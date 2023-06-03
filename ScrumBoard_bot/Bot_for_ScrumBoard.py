@@ -42,6 +42,12 @@ old_value = ""
 keyboard = types.InlineKeyboardMarkup()
 keyboard.row(types.InlineKeyboardButton("tasks", callback_data="tasks"),
              types.InlineKeyboardButton("new task", callback_data="new task"))
+keyboard_next = types.InlineKeyboardMarkup()
+keyboard_next.row(types.InlineKeyboardButton("task 1", callback_data="task 1"),
+                  types.InlineKeyboardButton("task 2", callback_data="task 2"))
+keyboard_new = types.InlineKeyboardMarkup()
+keyboard_new.row(types.InlineKeyboardButton("add task", callback_data="add task"),
+                 types.InlineKeyboardButton("cancel", callback_data="cancel"))
 
 
 @dp.message_handler(commands=['options'])
@@ -57,9 +63,11 @@ async def callback_options(query: types.CallbackQuery):
 
     if data == "tasks":
         value = "your tasks now"
+        # await bot.delete_message(chat_id=query.message.chat.id,
+        #                      message_id=query.message.message_id)
         await bot.edit_message_text(chat_id=query.message.chat.id,
                                     message_id=query.message.message_id,
-                                    text=value, reply_markup=keyboard)
+                                    text=value, reply_markup=keyboard_next)
         old_value = value
         value = ""
 
@@ -67,7 +75,7 @@ async def callback_options(query: types.CallbackQuery):
         value = "add a new task"
         await bot.edit_message_text(chat_id=query.message.chat.id,
                                     message_id=query.message.message_id,
-                                    text=value, reply_markup=keyboard)
+                                    text=value, reply_markup=keyboard_new)
         old_value = value
         value = ""
 
