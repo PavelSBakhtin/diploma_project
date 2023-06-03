@@ -9,10 +9,11 @@ logging.basicConfig(level=logging.INFO, filename="bot_log.csv", filemode="w",
 with open("key.txt", "r") as f:
     text = f.readline()
 TOKEN = str(text)
-MSG = "{}, choose an action:"
+MSG = "{}, choose an action"
 
 bot = Bot(token=TOKEN)
 dp = Dispatcher(bot=bot)
+
 
 @dp.message_handler(commands=['start'])
 async def start_handler(message: types.Message):
@@ -30,13 +31,6 @@ async def start_handler(message: types.Message):
     btns.add(btn_opt, btn_out)
     await bot.send_message(user_id, MSG.format(user_name), reply_markup=btns)
 
-@dp.message_handler(commands=['options'])
-async def start_handler(message: types.Message):
-    await bot.send_message(message.from_user.id, "select an option:")
-    if value == "":
-        await bot.send_message(message.from_user.id, "", reply_markup=keyboard)
-    else:
-        await bot.send_message(message.from_user.id, value, reply_markup=keyboard)
 
 @dp.message_handler(commands=['quit'])
 async def quit_handler(message: types.Message):
@@ -49,16 +43,33 @@ keyboard = types.InlineKeyboardMarkup()
 keyboard.row(types.InlineKeyboardButton("tasks", callback_data="tasks"),
              types.InlineKeyboardButton("new task", callback_data="new task"))
 
-@dp.callback_query_handler(lambda c: True)
-async def callback_calc(query):
+
+@dp.message_handler(commands=['options'])
+async def start_handler(message: types.Message):
+    await bot.send_message(message.from_user.id, "select an option:", reply_markup=keyboard)
+
+
+@dp.callback_query_handler(lambda call: True)
+async def callback_options(query: types.CallbackQuery):
 
     global value, old_value
     data = query.data
 
     if data == "tasks":
         value = "your tasks now"
-    if data == "new task":
+        await bot.edit_message_text(chat_id=query.message.chat.id,
+                                    message_id=query.message.message_id,
+                                    text=value, reply_markup=keyboard)
+        old_value = value
+        value = ""
+
+    elif data == "new task":
         value = "add a new task"
+        await bot.edit_message_text(chat_id=query.message.chat.id,
+                                    message_id=query.message.message_id,
+                                    text=value, reply_markup=keyboard)
+        old_value = value
+        value = ""
 
 if __name__ == '__main__':
     executor.start_polling(dp)
