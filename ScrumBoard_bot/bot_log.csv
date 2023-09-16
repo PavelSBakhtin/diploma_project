@@ -1,5 +1,371 @@
-2023-06-03 15:03:30,564: INFO _welcome-362 Bot: scrum_board_bot [@ScrumBoard_bot]
-2023-06-03 15:03:30,565: INFO start_polling-358 Start polling.
-2023-06-03 15:03:31,542: INFO start_handler-25 user_id=2063273849 user_bot=False user_message='/start'
-2023-06-03 15:03:58,010: INFO stop_polling-433 Stop polling...
-2023-06-03 15:03:58,011: WARNING start_polling-329 Goodbye!
+2023-09-16 18:20:29,968: INFO _welcome-362 Bot: scrum_board_bot [@ScrumBoard_bot]
+2023-09-16 18:20:30,115: WARNING _skip_updates-358 Updates were skipped successfully.
+2023-09-16 18:20:30,115: INFO start_polling-358 Start polling.
+2023-09-16 18:20:32,235: INFO start_handler-33 user_id=2063273849 user_bot=False user_message='/start'
+2023-09-16 18:24:06,473: INFO start_handler-33 user_id=2063273849 user_bot=False user_message='/start'
+2023-09-16 18:25:31,405: INFO stop_polling-433 Stop polling...
+2023-09-16 18:25:31,406: WARNING start_polling-329 Goodbye!
+2023-09-16 18:28:14,513: INFO _welcome-362 Bot: scrum_board_bot [@ScrumBoard_bot]
+2023-09-16 18:28:14,660: WARNING _skip_updates-358 Updates were skipped successfully.
+2023-09-16 18:28:14,660: INFO start_polling-358 Start polling.
+2023-09-16 18:28:16,316: INFO start_handler-33 user_id=2063273849 user_bot=False user_message='/start'
+2023-09-16 18:28:28,168: ERROR default_exception_handler-1707 Task exception was never retrieved
+future: <Task finished name='Task-23' coro=<Dispatcher._process_polling_updates() done, defined at C:\Users\Павел\AppData\Local\Programs\Python\Python38\lib\site-packages\aiogram\dispatcher\dispatcher.py:407> exception=TypeError("login_handler() missing 1 required positional argument: 'message'")>
+Traceback (most recent call last):
+  File "C:\Users\Павел\AppData\Local\Programs\Python\Python38\lib\site-packages\aiogram\dispatcher\dispatcher.py", line 415, in _process_polling_updates
+    for responses in itertools.chain.from_iterable(await self.process_updates(updates, fast)):
+  File "C:\Users\Павел\AppData\Local\Programs\Python\Python38\lib\site-packages\aiogram\dispatcher\dispatcher.py", line 235, in process_updates
+    return await asyncio.gather(*tasks)
+  File "C:\Users\Павел\AppData\Local\Programs\Python\Python38\lib\site-packages\aiogram\dispatcher\handler.py", line 117, in notify
+    response = await handler_obj.handler(*args, **partial_data)
+  File "C:\Users\Павел\AppData\Local\Programs\Python\Python38\lib\site-packages\aiogram\dispatcher\dispatcher.py", line 256, in process_update
+    return await self.message_handlers.notify(update.message)
+  File "C:\Users\Павел\AppData\Local\Programs\Python\Python38\lib\site-packages\aiogram\dispatcher\handler.py", line 117, in notify
+    response = await handler_obj.handler(*args, **partial_data)
+  File "d:/учёба/Python/Diploma/diploma_project/ScrumBoard_bot/bot_main.py", line 75, in password_text
+    login_handler()
+TypeError: login_handler() missing 1 required positional argument: 'message'
+2023-09-16 18:29:08,030: INFO stop_polling-433 Stop polling...
+2023-09-16 18:29:08,030: WARNING start_polling-329 Goodbye!
+2023-09-16 18:31:01,217: INFO _welcome-362 Bot: scrum_board_bot [@ScrumBoard_bot]
+2023-09-16 18:31:01,360: WARNING _skip_updates-358 Updates were skipped successfully.
+2023-09-16 18:31:01,361: INFO start_polling-358 Start polling.
+2023-09-16 18:31:03,315: INFO start_handler-33 user_id=2063273849 user_bot=False user_message='/start'
+2023-09-16 18:31:31,214: INFO stop_polling-433 Stop polling...
+2023-09-16 18:31:31,214: WARNING start_polling-329 Goodbye!
+2023-09-16 18:32:40,559: INFO _welcome-362 Bot: scrum_board_bot [@ScrumBoard_bot]
+2023-09-16 18:32:40,710: WARNING _skip_updates-358 Updates were skipped successfully.
+2023-09-16 18:32:40,710: INFO start_polling-358 Start polling.
+2023-09-16 18:32:42,688: INFO start_handler-33 user_id=2063273849 user_bot=False user_message='/start'
+2023-09-16 18:37:31,702: INFO stop_polling-433 Stop polling...
+2023-09-16 18:37:31,703: WARNING start_polling-329 Goodbye!
+2023-09-16 18:37:51,586: INFO _welcome-362 Bot: scrum_board_bot [@ScrumBoard_bot]
+2023-09-16 18:37:51,735: WARNING _skip_updates-358 Updates were skipped successfully.
+2023-09-16 18:37:51,735: INFO start_polling-358 Start polling.
+2023-09-16 18:37:52,504: INFO start_handler-33 user_id=2063273849 user_bot=False user_message='/start'
+2023-09-16 18:39:20,078: INFO stop_polling-433 Stop polling...
+2023-09-16 18:39:20,079: WARNING start_polling-329 Goodbye!
+2023-09-16 18:42:03,959: INFO _welcome-362 Bot: scrum_board_bot [@ScrumBoard_bot]
+2023-09-16 18:42:04,101: WARNING _skip_updates-358 Updates were skipped successfully.
+2023-09-16 18:42:04,101: INFO start_polling-358 Start polling.
+2023-09-16 18:46:22,259: INFO start_handler-33 user_id=2063273849 user_bot=False user_message='/start'
+2023-09-16 18:49:53,334: INFO stop_polling-433 Stop polling...
+2023-09-16 18:49:53,335: WARNING start_polling-329 Goodbye!
+2023-09-16 18:49:55,807: INFO _welcome-362 Bot: scrum_board_bot [@ScrumBoard_bot]
+2023-09-16 18:49:55,954: WARNING _skip_updates-358 Updates were skipped successfully.
+2023-09-16 18:49:55,954: INFO start_polling-358 Start polling.
+2023-09-16 19:00:54,997: INFO start_handler-33 user_id=2063273849 user_bot=False user_message='/start'
+2023-09-16 19:01:03,091: ERROR start_polling-390 Cause exception while getting updates.
+Traceback (most recent call last):
+  File "C:\Users\Павел\AppData\Local\Programs\Python\Python38\lib\site-packages\aiogram\bot\api.py", line 139, in make_request
+    async with session.post(url, data=req, **kwargs) as response:
+  File "C:\Users\Павел\AppData\Local\Programs\Python\Python38\lib\site-packages\aiohttp\client.py", line 1141, in __aenter__
+    self._resp = await self._coro
+  File "C:\Users\Павел\AppData\Local\Programs\Python\Python38\lib\site-packages\aiohttp\client.py", line 560, in _request
+    await resp.start(conn)
+  File "C:\Users\Павел\AppData\Local\Programs\Python\Python38\lib\site-packages\aiohttp\client_reqrep.py", line 899, in start
+    message, payload = await protocol.read()  # type: ignore[union-attr]
+  File "C:\Users\Павел\AppData\Local\Programs\Python\Python38\lib\site-packages\aiohttp\streams.py", line 616, in read
+    await self._waiter
+aiohttp.client_exceptions.ClientOSError: [Errno 1] [SSL: APPLICATION_DATA_AFTER_CLOSE_NOTIFY] application data after close notify (_ssl.c:2758)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Павел\AppData\Local\Programs\Python\Python38\lib\site-packages\aiogram\dispatcher\dispatcher.py", line 381, in start_polling
+    updates = await self.bot.get_updates(
+  File "C:\Users\Павел\AppData\Local\Programs\Python\Python38\lib\site-packages\aiogram\bot\bot.py", line 110, in get_updates
+    result = await self.request(api.Methods.GET_UPDATES, payload)
+  File "C:\Users\Павел\AppData\Local\Programs\Python\Python38\lib\site-packages\aiogram\bot\base.py", line 236, in request
+    return await api.make_request(await self.get_session(), self.server, self.__token, method, data, files,
+  File "C:\Users\Павел\AppData\Local\Programs\Python\Python38\lib\site-packages\aiogram\bot\api.py", line 142, in make_request
+    raise exceptions.NetworkError(f"aiohttp client throws an error: {e.__class__.__name__}: {e}")
+aiogram.utils.exceptions.NetworkError: Aiohttp client throws an error: ClientOSError: [Errno 1] [SSL: APPLICATION_DATA_AFTER_CLOSE_NOTIFY] application data after close notify (_ssl.c:2758)
+2023-09-16 19:01:08,397: INFO start_handler-33 user_id=2063273849 user_bot=False user_message='/start'
+2023-09-16 19:02:53,280: ERROR start_polling-390 Cause exception while getting updates.
+Traceback (most recent call last):
+  File "C:\Users\Павел\AppData\Local\Programs\Python\Python38\lib\site-packages\aiogram\bot\api.py", line 139, in make_request
+    async with session.post(url, data=req, **kwargs) as response:
+  File "C:\Users\Павел\AppData\Local\Programs\Python\Python38\lib\site-packages\aiohttp\client.py", line 1141, in __aenter__
+    self._resp = await self._coro
+  File "C:\Users\Павел\AppData\Local\Programs\Python\Python38\lib\site-packages\aiohttp\client.py", line 560, in _request
+    await resp.start(conn)
+  File "C:\Users\Павел\AppData\Local\Programs\Python\Python38\lib\site-packages\aiohttp\client_reqrep.py", line 899, in start
+    message, payload = await protocol.read()  # type: ignore[union-attr]
+  File "C:\Users\Павел\AppData\Local\Programs\Python\Python38\lib\site-packages\aiohttp\streams.py", line 616, in read
+    await self._waiter
+aiohttp.client_exceptions.ClientOSError: [Errno 1] [SSL: APPLICATION_DATA_AFTER_CLOSE_NOTIFY] application data after close notify (_ssl.c:2758)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Павел\AppData\Local\Programs\Python\Python38\lib\site-packages\aiogram\dispatcher\dispatcher.py", line 381, in start_polling
+    updates = await self.bot.get_updates(
+  File "C:\Users\Павел\AppData\Local\Programs\Python\Python38\lib\site-packages\aiogram\bot\bot.py", line 110, in get_updates
+    result = await self.request(api.Methods.GET_UPDATES, payload)
+  File "C:\Users\Павел\AppData\Local\Programs\Python\Python38\lib\site-packages\aiogram\bot\base.py", line 236, in request
+    return await api.make_request(await self.get_session(), self.server, self.__token, method, data, files,
+  File "C:\Users\Павел\AppData\Local\Programs\Python\Python38\lib\site-packages\aiogram\bot\api.py", line 142, in make_request
+    raise exceptions.NetworkError(f"aiohttp client throws an error: {e.__class__.__name__}: {e}")
+aiogram.utils.exceptions.NetworkError: Aiohttp client throws an error: ClientOSError: [Errno 1] [SSL: APPLICATION_DATA_AFTER_CLOSE_NOTIFY] application data after close notify (_ssl.c:2758)
+2023-09-16 19:03:59,179: ERROR start_polling-390 Cause exception while getting updates.
+Traceback (most recent call last):
+  File "C:\Users\Павел\AppData\Local\Programs\Python\Python38\lib\site-packages\aiogram\bot\api.py", line 139, in make_request
+    async with session.post(url, data=req, **kwargs) as response:
+  File "C:\Users\Павел\AppData\Local\Programs\Python\Python38\lib\site-packages\aiohttp\client.py", line 1141, in __aenter__
+    self._resp = await self._coro
+  File "C:\Users\Павел\AppData\Local\Programs\Python\Python38\lib\site-packages\aiohttp\client.py", line 560, in _request
+    await resp.start(conn)
+  File "C:\Users\Павел\AppData\Local\Programs\Python\Python38\lib\site-packages\aiohttp\client_reqrep.py", line 899, in start
+    message, payload = await protocol.read()  # type: ignore[union-attr]
+  File "C:\Users\Павел\AppData\Local\Programs\Python\Python38\lib\site-packages\aiohttp\streams.py", line 616, in read
+    await self._waiter
+aiohttp.client_exceptions.ClientOSError: [Errno 1] [SSL: APPLICATION_DATA_AFTER_CLOSE_NOTIFY] application data after close notify (_ssl.c:2758)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Павел\AppData\Local\Programs\Python\Python38\lib\site-packages\aiogram\dispatcher\dispatcher.py", line 381, in start_polling
+    updates = await self.bot.get_updates(
+  File "C:\Users\Павел\AppData\Local\Programs\Python\Python38\lib\site-packages\aiogram\bot\bot.py", line 110, in get_updates
+    result = await self.request(api.Methods.GET_UPDATES, payload)
+  File "C:\Users\Павел\AppData\Local\Programs\Python\Python38\lib\site-packages\aiogram\bot\base.py", line 236, in request
+    return await api.make_request(await self.get_session(), self.server, self.__token, method, data, files,
+  File "C:\Users\Павел\AppData\Local\Programs\Python\Python38\lib\site-packages\aiogram\bot\api.py", line 142, in make_request
+    raise exceptions.NetworkError(f"aiohttp client throws an error: {e.__class__.__name__}: {e}")
+aiogram.utils.exceptions.NetworkError: Aiohttp client throws an error: ClientOSError: [Errno 1] [SSL: APPLICATION_DATA_AFTER_CLOSE_NOTIFY] application data after close notify (_ssl.c:2758)
+2023-09-16 19:05:22,910: INFO stop_polling-433 Stop polling...
+2023-09-16 19:05:22,911: WARNING start_polling-329 Goodbye!
+2023-09-16 19:05:25,509: INFO _welcome-362 Bot: scrum_board_bot [@ScrumBoard_bot]
+2023-09-16 19:05:25,655: WARNING _skip_updates-358 Updates were skipped successfully.
+2023-09-16 19:05:25,655: INFO start_polling-358 Start polling.
+2023-09-16 19:06:38,299: INFO start_handler-38 user_id=2063273849 user_bot=False user_message='/start'
+2023-09-16 19:06:46,493: INFO start_handler-38 user_id=2063273849 user_bot=False user_message='/start'
+2023-09-16 19:07:47,366: INFO stop_polling-433 Stop polling...
+2023-09-16 19:07:47,367: WARNING start_polling-329 Goodbye!
+2023-09-16 19:07:49,829: INFO _welcome-362 Bot: scrum_board_bot [@ScrumBoard_bot]
+2023-09-16 19:07:49,988: WARNING _skip_updates-358 Updates were skipped successfully.
+2023-09-16 19:07:49,988: INFO start_polling-358 Start polling.
+2023-09-16 19:08:16,093: INFO start_handler-38 user_id=2063273849 user_bot=False user_message='/start'
+2023-09-16 19:08:27,769: ERROR start_polling-390 Cause exception while getting updates.
+Traceback (most recent call last):
+  File "C:\Users\Павел\AppData\Local\Programs\Python\Python38\lib\site-packages\aiogram\bot\api.py", line 139, in make_request
+    async with session.post(url, data=req, **kwargs) as response:
+  File "C:\Users\Павел\AppData\Local\Programs\Python\Python38\lib\site-packages\aiohttp\client.py", line 1141, in __aenter__
+    self._resp = await self._coro
+  File "C:\Users\Павел\AppData\Local\Programs\Python\Python38\lib\site-packages\aiohttp\client.py", line 560, in _request
+    await resp.start(conn)
+  File "C:\Users\Павел\AppData\Local\Programs\Python\Python38\lib\site-packages\aiohttp\client_reqrep.py", line 899, in start
+    message, payload = await protocol.read()  # type: ignore[union-attr]
+  File "C:\Users\Павел\AppData\Local\Programs\Python\Python38\lib\site-packages\aiohttp\streams.py", line 616, in read
+    await self._waiter
+aiohttp.client_exceptions.ClientOSError: [Errno 1] [SSL: APPLICATION_DATA_AFTER_CLOSE_NOTIFY] application data after close notify (_ssl.c:2758)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Павел\AppData\Local\Programs\Python\Python38\lib\site-packages\aiogram\dispatcher\dispatcher.py", line 381, in start_polling
+    updates = await self.bot.get_updates(
+  File "C:\Users\Павел\AppData\Local\Programs\Python\Python38\lib\site-packages\aiogram\bot\bot.py", line 110, in get_updates
+    result = await self.request(api.Methods.GET_UPDATES, payload)
+  File "C:\Users\Павел\AppData\Local\Programs\Python\Python38\lib\site-packages\aiogram\bot\base.py", line 236, in request
+    return await api.make_request(await self.get_session(), self.server, self.__token, method, data, files,
+  File "C:\Users\Павел\AppData\Local\Programs\Python\Python38\lib\site-packages\aiogram\bot\api.py", line 142, in make_request
+    raise exceptions.NetworkError(f"aiohttp client throws an error: {e.__class__.__name__}: {e}")
+aiogram.utils.exceptions.NetworkError: Aiohttp client throws an error: ClientOSError: [Errno 1] [SSL: APPLICATION_DATA_AFTER_CLOSE_NOTIFY] application data after close notify (_ssl.c:2758)
+2023-09-16 19:09:00,273: ERROR start_polling-390 Cause exception while getting updates.
+Traceback (most recent call last):
+  File "C:\Users\Павел\AppData\Local\Programs\Python\Python38\lib\site-packages\aiogram\bot\api.py", line 139, in make_request
+    async with session.post(url, data=req, **kwargs) as response:
+  File "C:\Users\Павел\AppData\Local\Programs\Python\Python38\lib\site-packages\aiohttp\client.py", line 1141, in __aenter__
+    self._resp = await self._coro
+  File "C:\Users\Павел\AppData\Local\Programs\Python\Python38\lib\site-packages\aiohttp\client.py", line 536, in _request
+    conn = await self._connector.connect(
+  File "C:\Users\Павел\AppData\Local\Programs\Python\Python38\lib\site-packages\aiohttp\connector.py", line 543, in connect
+    raise ClientConnectionError("Connector is closed.")
+aiohttp.client_exceptions.ClientConnectionError: Connector is closed.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Павел\AppData\Local\Programs\Python\Python38\lib\site-packages\aiogram\dispatcher\dispatcher.py", line 381, in start_polling
+    updates = await self.bot.get_updates(
+  File "C:\Users\Павел\AppData\Local\Programs\Python\Python38\lib\site-packages\aiogram\bot\bot.py", line 110, in get_updates
+    result = await self.request(api.Methods.GET_UPDATES, payload)
+  File "C:\Users\Павел\AppData\Local\Programs\Python\Python38\lib\site-packages\aiogram\bot\base.py", line 236, in request
+    return await api.make_request(await self.get_session(), self.server, self.__token, method, data, files,
+  File "C:\Users\Павел\AppData\Local\Programs\Python\Python38\lib\site-packages\aiogram\bot\api.py", line 142, in make_request
+    raise exceptions.NetworkError(f"aiohttp client throws an error: {e.__class__.__name__}: {e}")
+aiogram.utils.exceptions.NetworkError: Aiohttp client throws an error: ClientConnectionError: Connector is closed.
+2023-09-16 19:17:39,390: INFO stop_polling-433 Stop polling...
+2023-09-16 19:17:39,391: WARNING start_polling-329 Goodbye!
+2023-09-16 19:17:41,907: INFO _welcome-362 Bot: scrum_board_bot [@ScrumBoard_bot]
+2023-09-16 19:17:42,050: WARNING _skip_updates-358 Updates were skipped successfully.
+2023-09-16 19:17:42,051: INFO start_polling-358 Start polling.
+2023-09-16 19:23:36,442: INFO start_handler-38 user_id=2063273849 user_bot=False user_message='/start'
+2023-09-16 19:24:05,558: INFO stop_polling-433 Stop polling...
+2023-09-16 19:24:05,559: WARNING start_polling-329 Goodbye!
+2023-09-16 19:24:08,128: INFO _welcome-362 Bot: scrum_board_bot [@ScrumBoard_bot]
+2023-09-16 19:24:08,291: WARNING _skip_updates-358 Updates were skipped successfully.
+2023-09-16 19:24:08,292: INFO start_polling-358 Start polling.
+2023-09-16 19:24:56,018: INFO start_handler-33 user_id=2063273849 user_bot=False user_message='/start'
+2023-09-16 19:26:26,974: INFO stop_polling-433 Stop polling...
+2023-09-16 19:26:26,975: WARNING start_polling-329 Goodbye!
+2023-09-16 19:26:29,492: INFO _welcome-362 Bot: scrum_board_bot [@ScrumBoard_bot]
+2023-09-16 19:26:29,641: WARNING _skip_updates-358 Updates were skipped successfully.
+2023-09-16 19:26:29,641: INFO start_polling-358 Start polling.
+2023-09-16 19:26:31,975: INFO stop_polling-433 Stop polling...
+2023-09-16 19:26:31,975: WARNING start_polling-329 Goodbye!
+2023-09-16 19:31:11,388: INFO _welcome-362 Bot: scrum_board_bot [@ScrumBoard_bot]
+2023-09-16 19:31:11,533: WARNING _skip_updates-358 Updates were skipped successfully.
+2023-09-16 19:31:11,533: INFO start_polling-358 Start polling.
+2023-09-16 19:31:12,039: INFO start_handler-35 user_id=2063273849 user_bot=False user_message='/start'
+2023-09-16 19:31:28,190: INFO start_handler-35 user_id=2063273849 user_bot=False user_message='/start'
+2023-09-16 19:34:03,839: INFO stop_polling-433 Stop polling...
+2023-09-16 19:34:03,840: WARNING start_polling-329 Goodbye!
+2023-09-16 19:50:56,430: INFO _welcome-362 Bot: scrum_board_bot [@ScrumBoard_bot]
+2023-09-16 19:50:56,578: WARNING _skip_updates-358 Updates were skipped successfully.
+2023-09-16 19:50:56,578: INFO start_polling-358 Start polling.
+2023-09-16 19:50:58,354: INFO start_handler-34 user_id=2063273849 user_bot=False user_message='/start'
+2023-09-16 19:56:29,895: INFO stop_polling-433 Stop polling...
+2023-09-16 19:56:29,896: WARNING start_polling-329 Goodbye!
+2023-09-16 19:56:32,358: INFO _welcome-362 Bot: scrum_board_bot [@ScrumBoard_bot]
+2023-09-16 19:56:32,524: WARNING _skip_updates-358 Updates were skipped successfully.
+2023-09-16 19:56:32,524: INFO start_polling-358 Start polling.
+2023-09-16 19:56:33,575: INFO stop_polling-433 Stop polling...
+2023-09-16 19:56:33,576: WARNING start_polling-329 Goodbye!
+2023-09-16 19:56:38,317: INFO _welcome-362 Bot: scrum_board_bot [@ScrumBoard_bot]
+2023-09-16 19:56:38,486: WARNING _skip_updates-358 Updates were skipped successfully.
+2023-09-16 19:56:38,487: INFO start_polling-358 Start polling.
+2023-09-16 19:56:47,251: INFO start_handler-34 user_id=2063273849 user_bot=False user_message='/start'
+2023-09-16 19:57:19,190: ERROR default_exception_handler-1707 Task exception was never retrieved
+future: <Task finished name='Task-35' coro=<Dispatcher._process_polling_updates() done, defined at C:\Users\Павел\AppData\Local\Programs\Python\Python38\lib\site-packages\aiogram\dispatcher\dispatcher.py:407> exception=TypeError("send_message() got an unexpected keyword argument 'message_id'")>
+Traceback (most recent call last):
+  File "C:\Users\Павел\AppData\Local\Programs\Python\Python38\lib\site-packages\aiogram\dispatcher\dispatcher.py", line 415, in _process_polling_updates
+    for responses in itertools.chain.from_iterable(await self.process_updates(updates, fast)):
+  File "C:\Users\Павел\AppData\Local\Programs\Python\Python38\lib\site-packages\aiogram\dispatcher\dispatcher.py", line 235, in process_updates
+    return await asyncio.gather(*tasks)
+  File "C:\Users\Павел\AppData\Local\Programs\Python\Python38\lib\site-packages\aiogram\dispatcher\handler.py", line 117, in notify
+    response = await handler_obj.handler(*args, **partial_data)
+  File "C:\Users\Павел\AppData\Local\Programs\Python\Python38\lib\site-packages\aiogram\dispatcher\dispatcher.py", line 283, in process_update
+    return await self.callback_query_handlers.notify(update.callback_query)
+  File "C:\Users\Павел\AppData\Local\Programs\Python\Python38\lib\site-packages\aiogram\dispatcher\handler.py", line 117, in notify
+    response = await handler_obj.handler(*args, **partial_data)
+  File "d:/учёба/Python/Diploma/diploma_project/ScrumBoard_bot/bot_main.py", line 136, in callback_options
+    await bot.send_message(chat_id=query.message.chat.id,
+TypeError: send_message() got an unexpected keyword argument 'message_id'
+2023-09-16 19:57:30,682: ERROR default_exception_handler-1707 Task exception was never retrieved
+future: <Task finished name='Task-47' coro=<Dispatcher._process_polling_updates() done, defined at C:\Users\Павел\AppData\Local\Programs\Python\Python38\lib\site-packages\aiogram\dispatcher\dispatcher.py:407> exception=TypeError("send_message() got an unexpected keyword argument 'message_id'")>
+Traceback (most recent call last):
+  File "C:\Users\Павел\AppData\Local\Programs\Python\Python38\lib\site-packages\aiogram\dispatcher\dispatcher.py", line 415, in _process_polling_updates
+    for responses in itertools.chain.from_iterable(await self.process_updates(updates, fast)):
+  File "C:\Users\Павел\AppData\Local\Programs\Python\Python38\lib\site-packages\aiogram\dispatcher\dispatcher.py", line 235, in process_updates
+    return await asyncio.gather(*tasks)
+  File "C:\Users\Павел\AppData\Local\Programs\Python\Python38\lib\site-packages\aiogram\dispatcher\handler.py", line 117, in notify
+    response = await handler_obj.handler(*args, **partial_data)
+  File "C:\Users\Павел\AppData\Local\Programs\Python\Python38\lib\site-packages\aiogram\dispatcher\dispatcher.py", line 283, in process_update
+    return await self.callback_query_handlers.notify(update.callback_query)
+  File "C:\Users\Павел\AppData\Local\Programs\Python\Python38\lib\site-packages\aiogram\dispatcher\handler.py", line 117, in notify
+    response = await handler_obj.handler(*args, **partial_data)
+  File "d:/учёба/Python/Diploma/diploma_project/ScrumBoard_bot/bot_main.py", line 136, in callback_options
+    await bot.send_message(chat_id=query.message.chat.id,
+TypeError: send_message() got an unexpected keyword argument 'message_id'
+2023-09-16 19:58:06,287: INFO stop_polling-433 Stop polling...
+2023-09-16 19:58:06,288: WARNING start_polling-329 Goodbye!
+2023-09-16 20:12:13,560: INFO _welcome-362 Bot: scrum_board_bot [@ScrumBoard_bot]
+2023-09-16 20:12:13,745: WARNING _skip_updates-358 Updates were skipped successfully.
+2023-09-16 20:12:13,745: INFO start_polling-358 Start polling.
+2023-09-16 20:12:15,471: INFO start_handler-34 user_id=2063273849 user_bot=False user_message='/start'
+2023-09-16 20:12:53,583: ERROR default_exception_handler-1707 Task exception was never retrieved
+future: <Task finished name='Task-39' coro=<Dispatcher._process_polling_updates() done, defined at C:\Users\Павел\AppData\Local\Programs\Python\Python38\lib\site-packages\aiogram\dispatcher\dispatcher.py:407> exception=TypeError("data_handler() missing 1 required positional argument: 'data'")>
+Traceback (most recent call last):
+  File "C:\Users\Павел\AppData\Local\Programs\Python\Python38\lib\site-packages\aiogram\dispatcher\dispatcher.py", line 415, in _process_polling_updates
+    for responses in itertools.chain.from_iterable(await self.process_updates(updates, fast)):
+  File "C:\Users\Павел\AppData\Local\Programs\Python\Python38\lib\site-packages\aiogram\dispatcher\dispatcher.py", line 235, in process_updates
+    return await asyncio.gather(*tasks)
+  File "C:\Users\Павел\AppData\Local\Programs\Python\Python38\lib\site-packages\aiogram\dispatcher\handler.py", line 117, in notify
+    response = await handler_obj.handler(*args, **partial_data)
+  File "C:\Users\Павел\AppData\Local\Programs\Python\Python38\lib\site-packages\aiogram\dispatcher\dispatcher.py", line 283, in process_update
+    return await self.callback_query_handlers.notify(update.callback_query)
+  File "C:\Users\Павел\AppData\Local\Programs\Python\Python38\lib\site-packages\aiogram\dispatcher\handler.py", line 117, in notify
+    response = await handler_obj.handler(*args, **partial_data)
+  File "d:/учёба/Python/Diploma/diploma_project/ScrumBoard_bot/bot_main.py", line 142, in callback_options
+    data_handler(result)
+TypeError: data_handler() missing 1 required positional argument: 'data'
+2023-09-16 20:13:26,895: INFO stop_polling-433 Stop polling...
+2023-09-16 20:13:26,896: WARNING start_polling-329 Goodbye!
+2023-09-16 20:24:05,258: INFO _welcome-362 Bot: scrum_board_bot [@ScrumBoard_bot]
+2023-09-16 20:24:05,408: WARNING _skip_updates-358 Updates were skipped successfully.
+2023-09-16 20:24:05,408: INFO start_polling-358 Start polling.
+2023-09-16 20:24:07,409: INFO start_handler-34 user_id=2063273849 user_bot=False user_message='/start'
+2023-09-16 20:24:35,683: ERROR default_exception_handler-1707 Task exception was never retrieved
+future: <Task finished name='Task-43' coro=<Dispatcher._process_polling_updates() done, defined at C:\Users\Павел\AppData\Local\Programs\Python\Python38\lib\site-packages\aiogram\dispatcher\dispatcher.py:407> exception=TypeError("data_handler() missing 1 required positional argument: 'data'")>
+Traceback (most recent call last):
+  File "C:\Users\Павел\AppData\Local\Programs\Python\Python38\lib\site-packages\aiogram\dispatcher\dispatcher.py", line 415, in _process_polling_updates
+    for responses in itertools.chain.from_iterable(await self.process_updates(updates, fast)):
+  File "C:\Users\Павел\AppData\Local\Programs\Python\Python38\lib\site-packages\aiogram\dispatcher\dispatcher.py", line 235, in process_updates
+    return await asyncio.gather(*tasks)
+  File "C:\Users\Павел\AppData\Local\Programs\Python\Python38\lib\site-packages\aiogram\dispatcher\handler.py", line 117, in notify
+    response = await handler_obj.handler(*args, **partial_data)
+  File "C:\Users\Павел\AppData\Local\Programs\Python\Python38\lib\site-packages\aiogram\dispatcher\dispatcher.py", line 283, in process_update
+    return await self.callback_query_handlers.notify(update.callback_query)
+  File "C:\Users\Павел\AppData\Local\Programs\Python\Python38\lib\site-packages\aiogram\dispatcher\handler.py", line 117, in notify
+    response = await handler_obj.handler(*args, **partial_data)
+  File "d:/учёба/Python/Diploma/diploma_project/ScrumBoard_bot/bot_main.py", line 143, in callback_options
+    data_handler(result)
+TypeError: data_handler() missing 1 required positional argument: 'data'
+2023-09-16 20:26:16,651: INFO start_handler-34 user_id=2063273849 user_bot=False user_message='/start'
+2023-09-16 20:26:42,901: ERROR default_exception_handler-1707 Task exception was never retrieved
+future: <Task finished name='Task-86' coro=<Dispatcher._process_polling_updates() done, defined at C:\Users\Павел\AppData\Local\Programs\Python\Python38\lib\site-packages\aiogram\dispatcher\dispatcher.py:407> exception=TypeError("data_handler() missing 1 required positional argument: 'data'")>
+Traceback (most recent call last):
+  File "C:\Users\Павел\AppData\Local\Programs\Python\Python38\lib\site-packages\aiogram\dispatcher\dispatcher.py", line 415, in _process_polling_updates
+    for responses in itertools.chain.from_iterable(await self.process_updates(updates, fast)):
+  File "C:\Users\Павел\AppData\Local\Programs\Python\Python38\lib\site-packages\aiogram\dispatcher\dispatcher.py", line 235, in process_updates
+    return await asyncio.gather(*tasks)
+  File "C:\Users\Павел\AppData\Local\Programs\Python\Python38\lib\site-packages\aiogram\dispatcher\handler.py", line 117, in notify
+    response = await handler_obj.handler(*args, **partial_data)
+  File "C:\Users\Павел\AppData\Local\Programs\Python\Python38\lib\site-packages\aiogram\dispatcher\dispatcher.py", line 283, in process_update
+    return await self.callback_query_handlers.notify(update.callback_query)
+  File "C:\Users\Павел\AppData\Local\Programs\Python\Python38\lib\site-packages\aiogram\dispatcher\handler.py", line 117, in notify
+    response = await handler_obj.handler(*args, **partial_data)
+  File "d:/учёба/Python/Diploma/diploma_project/ScrumBoard_bot/bot_main.py", line 143, in callback_options
+TypeError: data_handler() missing 1 required positional argument: 'data'
+2023-09-16 20:26:55,031: INFO stop_polling-433 Stop polling...
+2023-09-16 20:26:55,032: WARNING start_polling-329 Goodbye!
+2023-09-16 20:30:39,130: INFO _welcome-362 Bot: scrum_board_bot [@ScrumBoard_bot]
+2023-09-16 20:30:39,295: WARNING _skip_updates-358 Updates were skipped successfully.
+2023-09-16 20:30:39,295: INFO start_polling-358 Start polling.
+2023-09-16 20:30:43,011: INFO start_handler-34 user_id=2063273849 user_bot=False user_message='/start'
+2023-09-16 20:31:50,424: INFO stop_polling-433 Stop polling...
+2023-09-16 20:31:50,424: WARNING start_polling-329 Goodbye!
+2023-09-16 20:35:09,418: INFO _welcome-362 Bot: scrum_board_bot [@ScrumBoard_bot]
+2023-09-16 20:35:09,578: WARNING _skip_updates-358 Updates were skipped successfully.
+2023-09-16 20:35:09,578: INFO start_polling-358 Start polling.
+2023-09-16 20:35:12,643: INFO start_handler-35 user_id=2063273849 user_bot=False user_message='/start'
+2023-09-16 20:35:57,295: INFO stop_polling-433 Stop polling...
+2023-09-16 20:35:57,296: WARNING start_polling-329 Goodbye!
+2023-09-16 20:36:38,004: INFO _welcome-362 Bot: scrum_board_bot [@ScrumBoard_bot]
+2023-09-16 20:36:38,172: WARNING _skip_updates-358 Updates were skipped successfully.
+2023-09-16 20:36:38,173: INFO start_polling-358 Start polling.
+2023-09-16 20:36:38,322: INFO start_handler-35 user_id=2063273849 user_bot=False user_message='/start'
+2023-09-16 20:37:17,504: INFO stop_polling-433 Stop polling...
+2023-09-16 20:37:17,504: WARNING start_polling-329 Goodbye!
+2023-09-16 20:37:30,984: INFO _welcome-362 Bot: scrum_board_bot [@ScrumBoard_bot]
+2023-09-16 20:37:31,139: WARNING _skip_updates-358 Updates were skipped successfully.
+2023-09-16 20:37:31,140: INFO start_polling-358 Start polling.
+2023-09-16 20:37:39,040: INFO stop_polling-433 Stop polling...
+2023-09-16 20:37:39,040: WARNING start_polling-329 Goodbye!
+2023-09-16 20:42:00,511: INFO _welcome-362 Bot: scrum_board_bot [@ScrumBoard_bot]
+2023-09-16 20:42:00,705: WARNING _skip_updates-358 Updates were skipped successfully.
+2023-09-16 20:42:00,706: INFO start_polling-358 Start polling.
+2023-09-16 20:42:01,148: INFO start_handler-35 user_id=2063273849 user_bot=False user_message='/start'
+2023-09-16 20:42:56,264: INFO stop_polling-433 Stop polling...
+2023-09-16 20:42:56,264: WARNING start_polling-329 Goodbye!
+2023-09-16 20:54:06,675: INFO _welcome-362 Bot: scrum_board_bot [@ScrumBoard_bot]
+2023-09-16 20:54:06,841: WARNING _skip_updates-358 Updates were skipped successfully.
+2023-09-16 20:54:06,841: INFO start_polling-358 Start polling.
+2023-09-16 20:54:15,734: INFO start_handler-35 user_id=2063273849 user_bot=False user_message='/start'
+2023-09-16 20:54:55,740: INFO start_handler-35 user_id=2063273849 user_bot=False user_message='/start'
+2023-09-16 20:58:53,869: INFO start_handler-35 user_id=2063273849 user_bot=False user_message='/start'
+2023-09-16 21:00:51,641: INFO stop_polling-433 Stop polling...
+2023-09-16 21:00:51,642: WARNING start_polling-329 Goodbye!
