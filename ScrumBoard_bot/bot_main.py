@@ -1,11 +1,11 @@
 import logging
+import requests
 import bot_markups as mks
 from aiogram import Bot, Dispatcher, executor
-from aiogram.types import ReplyKeyboardRemove, Message, CallbackQuery
-from aiogram.dispatcher.filters.state import State, StatesGroup
-from aiogram.contrib.fsm_storage.memory import MemoryStorage
 from aiogram.dispatcher import FSMContext
-import requests
+from aiogram.contrib.fsm_storage.memory import MemoryStorage
+from aiogram.dispatcher.filters.state import State, StatesGroup
+from aiogram.types import ReplyKeyboardRemove, Message, CallbackQuery
 
 
 logging.basicConfig(level=logging.INFO, filename='bot_log.txt', filemode='a',  # 'utf-8',
