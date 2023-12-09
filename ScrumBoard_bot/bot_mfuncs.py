@@ -1,21 +1,27 @@
 import requests
 
-
+"""
+Запрос к Django api/token для аутентификации:
+"""
 def sing_in(lgn, pswd):
-    # Запрос к Django api/token для получения ответа:
     url = "http://localhost:8000/api/token/bot/"
     data_sing = {"email": lgn, "password": pswd}
     response_sing = requests.post(url, data_sing)
     return response_sing
 
 
+"""
+Запрос к Django api/v1/task для авторизации и получения списка заданий:
+"""
 def tasks_load(access_token):
-    # Запрос к Django api/v1/task для получения списка заданий:
     url = "http://127.0.0.1:8000/api/v1/task/"
     response_tasks = requests.get(url, access_token)
     return response_tasks
 
 
+"""
+Создание словаря с задачами: все задачи, мои задачи.
+"""
 def descr_load(response_list, user_tasks_id):
     tasks_all = []
     tasks_my = {}
@@ -31,8 +37,10 @@ def descr_load(response_list, user_tasks_id):
     return download
 
 
+"""
+Запрос к Django api/v1/task/id/ для изменения статуса задачи:
+"""
 def task_change(task_id_to_change, status_to_change, access_token):
-    # Запрос к Django api/v1/task/"id"/ для изменения статуса задания:
     url = "http://127.0.0.1:8000/api/v1/task/" + f"{task_id_to_change}/"
     response_task = requests.get(url, access_token)
     result = response_task.json()

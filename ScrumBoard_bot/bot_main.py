@@ -7,34 +7,58 @@ from aiogram.dispatcher.filters.state import State, StatesGroup
 from aiogram.types import ReplyKeyboardRemove, Message, CallbackQuery
 from bot_mfuncs import sing_in, tasks_load, descr_load, task_change
 
-
+"""
+Запись логов в файл с уровнем инфо:
+"""
 logging.basicConfig(level=logging.INFO, filename='bot_logging.txt', filemode='a',  #'utf-8',
                     format='%(asctime)s: %(levelname)s %(funcName)s-%(lineno)d %(message)s')
 
+"""
+Присвоение значения токена константе:
+"""
 with open('key.txt', 'r') as f:
     text = f.readline()
 TOKEN = str(text)
+"""
+Регуляно используемое сообщение присвоено константе:
+"""
 MSG = '{}, choose an action'
 
+"""
+Создание бота и диспетчера для него:
+"""
 bot = Bot(token=TOKEN)
 dp = Dispatcher(bot=bot, storage=MemoryStorage())
 
-bot_users_online = {}
-bot_users_tasks = {}
-bot_users_change = {}
+"""
+Словари для временного хранения информации о пользователях онлайн:
+"""
+bot_users_online = {} # ключи: id пользователя бота; значения: логин, пароль, статус, акцесс-токен.
+bot_users_tasks = {}  # ключи: all, my; значения: все задачи, задачи пользователя.
+bot_users_change = {} # ключ: id задачи; значение: новый статус задачи.
 
 
+"""
+Класс онлайн пользователя для машины состояний:
+"""
 class Form(StatesGroup):
-    first_msg = State()
-    second_msg = State()
-    third_msg = State()
-    fourth_msg = State()
-    login_user = State()
-    password_user = State()
-    tasks_id_user = State()
-    tasks_all_user = State()
+    first_msg = State()      # запрос логина пользователя (для удаления его из чата)
+    second_msg = State()     # логин, ответ пользователя (для удаления его из чата)
+    third_msg = State()      # запрос пароля пользлвателя (для удаления его из чата)
+    fourth_msg = State()     # пароль, ответ пользователя (для удаления его из чата)
+    login_user = State()     # логин, для записи в словарь bot_users_online
+    password_user = State()  # пароль, для записи в словарь bot_users_online
+    tasks_id_user = State()  # id из базы данных, для записи в словарь bot_users_tasks
+    tasks_all_user = State() # задачи из базы данных, для записи в словарь bot_users_tasks
 
 
+"""
+Хендлер команды старт:
+запись в логи о том, кто вызвал команду;
+запись пользователя в словарь bot_users_online;
+приветственное сообщение бота пользователю с обращением по имени;
+отправка регуляно используемого сообщения ботом с кнопками авторизации и выхода.
+"""
 @dp.message_handler(commands=['start'])
 async def start_handler(message: Message):
     user_id = message.from_user.id
@@ -46,10 +70,15 @@ async def start_handler(message: Message):
     bot_users_online[user_id] = None
     await message.reply(f'Hi, {user_full_name}!')
     await message.answer(MSG.format(user_name), reply_markup=mks.sing_buttons)
-    print(bot_users_online) # удалить (!)
-    print(bot_users_tasks) # удалить (!)
 
 
+"""
+Хендлер команды выход:
+команда сработает только если пользователь задавал команду старт;
+запись в логи о вызове команды;
+удаление всей информации о пользователе в словарях временного хранения данных о пользователях онлайн;
+бота прощается с пользователем и удаляет кнопки меню.
+"""
 @dp.message_handler(commands=['quit'])
 async def quit_handler(message: Message):
     user_id = message.from_user.id
@@ -61,11 +90,15 @@ async def quit_handler(message: Message):
         bot_users_tasks.pop(user_id)
         bot_users_change.pop(user_id)
         await message.answer('Goodbye! See you...', reply_markup=ReplyKeyboardRemove())
-        print(bot_users_online) # удалить (!)
-        print(bot_users_tasks) # удалить (!)
-        print(bot_users_change) # удалить (!)
 
 
+"""
+Хендлер команды логин:
+запись в логи о вызове команды;
+если пользователь онлайн - открывается машина состояний;
+бот запрашивает логин, запоминает первое сообщение для дальнейшего удаления;
+передача состояния к экземпляру класса Form - логин.
+"""
 @dp.message_handler(commands=['login'])
 async def login_handler(message: Message, state: FSMContext):
     user_id = message.from_user.id
@@ -80,6 +113,13 @@ async def login_handler(message: Message, state: FSMContext):
         await Form.login_user.set()
 
 
+"""
+Хендлер ответа на запрос логина:
+запись в логи о вызове команды;
+фиксация ответного сообщения с логином пользователя, плюс - для дальнейшего удаления;
+бот запрашивает пароль, запоминает и это сообщение для дальнейшего удаления;
+передача состояния к экземпляру класса Form - пароль.
+"""
 @dp.message_handler(state=Form.login_user)
 async def login_text(message: Message, state: FSMContext):
     user_id = message.from_user.id
@@ -96,6 +136,15 @@ async def login_text(message: Message, state: FSMContext):
     await Form.password_user.set()
 
 
+"""
+Хендлер ответа на запрос пароля:
+запись в логи о вызове команды;
+фиксация ответного сообщения с паролем пользователя;
+бот удаляет четыре сообщения из чата в целях информационной безопасности
+(удаляются запросы логина и пароля, а также сами сообщения с логином и паролем пользователя);
+бот сообщает, что принял от пользователя логин и длину паролья;
+передача состояния к экземпляру класса Form - id пользователя в базе данных.
+"""
 @dp.message_handler(state=Form.password_user)
 async def password_text(message: Message, state: FSMContext):
     user_name = message.from_user.first_name
@@ -115,6 +164,24 @@ async def password_text(message: Message, state: FSMContext):
     await message.answer(f'Data accepted:\n{lgn}, {new_text}')
     await Form.tasks_id_user.set()
 
+    """
+    1. Запрос к базе данных с логином и паролем для аутентификации пользователя:
+    - если аутентификация положительная:
+    в логи записываются полученные данные из базы данных, бот сообщает об успешной аутентификации,
+    в словарь bot_users_online записываются логин, пароль, статус True, акцесс-токен,
+    передача состояния к экземпляру класса Form - все задачи из базы данных;
+    - если аутентификация отрицательная:
+    бот информирует об этом пользователя, в логи записывается статус ошибки аутентификации,
+    логин-статус пользователя присваевается False, машина состояний закрывается.
+    2. После аутентификации отправляется запрос на авторизацию пользователя к базе данных:
+    - если авторизация положительная:
+    в логи записываются задачи из базы данных, бот сообщает об успешной авторизации,
+    в словарь bot_users_tasks записываются два словаря - все задачи, мои задачи,
+    машина состояний закрывается, бот отправляет регулярное сообшение и меняет кнопку логин на меню;
+    - если авторизация отрицательная:
+    бот информирует об этом пользователя, в логи записывается статус ошибки авторизации,
+    просит пользователя воспользоваться кнопками меню, машина состояний закрывается.
+    """
     response_sing = sing_in(data['login_user'], data['password_user'])
     if response_sing.status_code == 200:
         # Аутентификация прошла успешно:
@@ -141,7 +208,6 @@ async def password_text(message: Message, state: FSMContext):
                                          login_status=False)
         await state.finish()
         await message.answer('The login or password is entered incorrectly,\nor such user does not exist')
-        await message.answer(f'{MSG.format(user_name)}, use the buttons')
     
     if bot_users_online[user_id]['login_status'] == True:
         logging.info(f'{user_id=}, Data is loading...')
@@ -169,12 +235,17 @@ async def password_text(message: Message, state: FSMContext):
     else:
         bot_users_online[user_id] = None
         await state.finish()
-        await message.answer('Something went wrong, try again')
-
-    print(bot_users_online) # удалить (!)
-    print(bot_users_tasks) # удалить (!)
+        logging.info(f'{user_id=}, message: user is not authorized')
 
 
+"""
+Хендлер команды меню:
+проверка - пользователь онлайн, логин-статус True,
+если - да, то запись в логи о вызове команды, появляется меню с инлайн-кнопками;
+если - нет, или что-то пошло не по логике, то бот сообщает об этом пользователю
+и меняет кнопки на изначальные - догин и выход.
+
+"""
 @dp.message_handler(commands=['menu'])
 async def options_handler(message: Message):
     user_id = message.from_user.id
@@ -191,11 +262,35 @@ async def options_handler(message: Message):
                              reply_markup=mks.sing_buttons)
 
 
-# @dp.message_handler()
-# async def data_handler(message: Message, data):
-#     await message.answer(data)
+"""
+Хендлер на любое сообщение от пользователя:
+бот отвечает, что - не понимает команду и, что - у него есть конкретный алгоритм.
+"""
+@dp.message_handler()
+async def data_handler(message: Message):
+    await message.answer("I don't understand you,\nthis is not included in my algorithm")
 
 
+"""
+Хендлер работы с инлайн-кнопками:
+1) две кнопки - все задачи, мои задачи,
+при нажатии на все задачи - выводится соответствеющий список,
+при нажатии на мои задачи - выводится список кнопок по количеству задач;
+2) после выбора задачи из списка - поялвяется описание самой задачи,
+а под ней две кнопки - изменить статус и мои задачи;
+3) при нажатии на изменить статус - выводится список фиксированных статусов из STATUSES,
+после выбора статуса в словарь bot_users_change записывается id задачи и новый её статус,
+далее появляются две кнопки - подтвердить и отменить;
+4) при нажатии кнопки подтвердить - отправляется запрос к базе данных на изменение статуса задачи,
+при нажатии кнопки отменить - информация в словаре bot_users_change стерается;
+5) если в базе данных изменения произошли успешно, из неё выгружаются обновленные данные и
+перезаписываются в словаре bot_users_tasks, о чём бот сообщает пользователю,
+если в базе данных изменения не произошли - информация в словаре bot_users_change стерается,
+бот предлагает пользователю начать процедуру заново;
+6) каждый этап кол-бэка логируется, при возникновении поломки алгоритма меню инлайн-кнопок
+стерается информация о пользователе во всех словарях временного хранения информации и
+бот предлагает начать всё заново, появляются кнопки логин и выход.
+"""
 @dp.callback_query_handler(lambda call: True)
 async def callback_options(query: CallbackQuery):
 
@@ -272,7 +367,6 @@ async def callback_options(query: CallbackQuery):
                                         reply_markup=mks.keyboard_to_status)
             logging.info(f'{user_id=}, message: Selected status to change')
             bot_users_change[user_id].update({'status': status})
-            print(bot_users_change) # удалить (!)
 
     elif data == 'confirm':
         if bot_users_tasks[user_id][user_id_for_tasks]['my'] == None:
@@ -296,7 +390,6 @@ async def callback_options(query: CallbackQuery):
                     logging.info(f'{user_id=}, Loaded info: {response_list}')
                     logging.info(f'{user_id=}, Descriptions loaded successfully')
                     bot_users_tasks[user_id][user_tasks_id].update(download)
-                    print(bot_users_tasks) # удалить (!)
                     await bot.edit_message_text(chat_id=user_id, message_id=msg_id,
                                                 text='Data updated successfully',
                                                 reply_markup=None)
@@ -337,5 +430,8 @@ async def callback_options(query: CallbackQuery):
         logging.info(f'{user_id=}, message: Unknown request')
 
 
+"""
+Запиуск телеграм-бота
+"""
 if __name__ == '__main__':
     executor.start_polling(dp, skip_updates=True)
