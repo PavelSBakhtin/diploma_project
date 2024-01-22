@@ -2,10 +2,11 @@ from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
 
-async def create_keyboard(data):
+def create_keyboard(data):
     """Контекстные кнопки: логин - выход, меню - выход"""
     s_btns = ReplyKeyboardMarkup(resize_keyboard=True, row_width=2)
     m_btns = ReplyKeyboardMarkup(resize_keyboard=True, row_width=2)
+    e_btns = ReplyKeyboardMarkup(resize_keyboard=True, row_width=1)
 
     btn_lgn = KeyboardButton('/login')
     btn_out = KeyboardButton('/quit')
@@ -13,8 +14,10 @@ async def create_keyboard(data):
 
     if data == "login":
         return s_btns.add(btn_lgn, btn_out)
-    else:
+    elif data == "menu":
         return m_btns.add(btn_men, btn_out)
+    else:
+        return e_btns.add(btn_out)
 
 sing_buttons = create_keyboard("login")
 menu_buttons = create_keyboard("menu")
