@@ -76,8 +76,10 @@ async def quit_handler(message: Message):
         user_msg = message.text
         logging.info(f'{user_id=}, {msg_id=}, {user_msg=}')
         bot_users_online.pop(user_id)
-        bot_users_tasks.pop(user_id)
-        bot_users_change.pop(user_id)
+        if user_id in bot_users_tasks:
+            bot_users_tasks.pop(user_id)
+        if user_id in bot_users_change:
+            bot_users_change.pop(user_id)
         await message.answer('Goodbye! See you...', reply_markup=ReplyKeyboardRemove())
 
 
@@ -164,31 +166,37 @@ async def password_text(message: Message, state: FSMContext):
     бот информирует об этом пользователя, в логи записывается статус ошибки аутентификации,
     логин-статус пользователя присваевается False, машина состояний закрывается.
     """
-    if response_sing.status_code == 200:
-        # Аутентификация прошла успешно:
-        logging.info(f'{user_id=}, Successful authorization')
-        response_data = response_sing.json()
-        access_token = response_data['access']
-        refresh_token = response_data['refresh']
-        user_tasks_id = response_data['id']
-        logging.info(f'{user_id=}, Loaded info: {response_data}')
-        await message.answer('Successful authorization')
-        bot_users_online[user_id] = dict(login=data['login_user'],
-                                         password=data['password_user'],
-                                         login_status=True,
-                                         access_token=response_data['access'])
-        async with state.proxy() as data:
-            data['tasks_id_user'] = user_tasks_id
-        await Form.tasks_all_user.set()
-    
-    else:
-        # Аутентификация не удалась:
-        logging.info(f'{user_id=}, Error: {response_sing.status_code}')
-        bot_users_online[user_id] = dict(login=data['login_user'],
-                                         password=data['password_user'],
-                                         login_status=False)
+    if response_sing == None:
+        # Подключение не установлено:
+        logging.info(f'{user_id=}, error: ConnectionError')
+        bot_users_online[user_id] = None
         await state.finish()
-        await message.answer('The login or password is entered incorrectly,\nor such user does not exist')
+        await message.answer('Something went wrong, use the buttons', reply_markup=mks.sing_buttons)
+    else:
+        if response_sing.status_code == 200:
+            # Аутентификация прошла успешно:
+            logging.info(f'{user_id=}, Successful authorization')
+            response_data = response_sing.json()
+            access_token = response_data['access']
+            refresh_token = response_data['refresh']
+            user_tasks_id = response_data['id']
+            logging.info(f'{user_id=}, Loaded info: {response_data}')
+            await message.answer('Successful authorization')
+            bot_users_online[user_id] = dict(login=data['login_user'],
+                                            password=data['password_user'],
+                                            login_status=True,
+                                            access_token=response_data['access'])
+            async with state.proxy() as data:
+                data['tasks_id_user'] = user_tasks_id
+            await Form.tasks_all_user.set()
+        else:
+            # Аутентификация не удалась:
+            logging.info(f'{user_id=}, Error: {response_sing.status_code}')
+            bot_users_online[user_id] = dict(login=data['login_user'],
+                                            password=data['password_user'],
+                                            login_status=False)
+            await state.finish()
+            await message.answer('The login or password is entered incorrectly,\nor such user does not exist')
     
     """
     2. После аутентификации отправляется запрос на авторизацию пользователя к базе данных:
@@ -200,33 +208,43 @@ async def password_text(message: Message, state: FSMContext):
     бот информирует об этом пользователя, в логи записывается статус ошибки авторизации,
     просит пользователя воспользоваться кнопками меню, машина состояний закрывается.
     """
-    if bot_users_online[user_id]['login_status'] == True:
-        logging.info(f'{user_id=}, Data is loading...')
-        response_tasks = tasks_load(access_token)
-        if response_tasks.status_code == 200:
-            # Авторизация прошла успешно:
-            logging.info(f'{user_id=}, Data loaded successfully')
-            response_list = response_tasks.json()
-            download = descr_load(response_list, user_tasks_id)
-            async with state.proxy() as data:
-                data['tasks_all_user'] = download
-            logging.info(f'{user_id=}, Loaded info: {response_list}')
-            logging.info(f'{user_id=}, Descriptions loaded successfully')
-            bot_users_tasks[user_id] = dict({user_tasks_id: data['tasks_all_user']})
-            await state.finish()
-            await message.answer(MSG.format(user_name), reply_markup=mks.menu_buttons)
-
-        else:
-            # Авторизация не удалась:
-            logging.info(f'{user_id=}, Error: {response_tasks.status_code}')
-            await state.finish()
-            await message.answer('Data not loaded')
-            await message.answer(f'{MSG.format(user_name)}, use the buttons')
-    
+    if bot_users_online[user_id] == None:
+        # Если аутентификация не удалась - загрузка данных пользователя не осуществляется:
+        pass
     else:
-        bot_users_online[user_id] = None
-        await state.finish()
-        logging.info(f'{user_id=}, message: user is not authorized')
+        if bot_users_online[user_id]['login_status'] == True:
+            logging.info(f'{user_id=}, Data is loading...')
+            response_tasks = tasks_load(access_token)
+            if response_tasks == None:
+                # Подключение не установлено:
+                logging.info(f'{user_id=}, error: ConnectionError')
+                bot_users_online[user_id] = None
+                await state.finish()
+                await message.answer('Something went wrong, use the buttons', reply_markup=mks.sing_buttons)
+            else:
+                if response_tasks.status_code == 200:
+                    # Авторизация прошла успешно:
+                    logging.info(f'{user_id=}, Data loaded successfully')
+                    response_list = response_tasks.json()
+                    download = descr_load(response_list, user_tasks_id)
+                    async with state.proxy() as data:
+                        data['tasks_all_user'] = download
+                    logging.info(f'{user_id=}, Loaded info: {response_list}')
+                    logging.info(f'{user_id=}, Descriptions loaded successfully')
+                    bot_users_tasks[user_id] = dict({user_tasks_id: data['tasks_all_user']})
+                    await state.finish()
+                    await message.answer(MSG.format(user_name), reply_markup=mks.menu_buttons)
+                else:
+                    # Авторизация не удалась:
+                    logging.info(f'{user_id=}, Error: {response_tasks.status_code}')
+                    await state.finish()
+                    await message.answer('Data not loaded')
+                    await message.answer(f'{MSG.format(user_name)}, use the buttons')
+        else:
+            bot_users_online[user_id] = None
+            await state.finish()
+            logging.info(f'{user_id=}, message: user is not authorized')
+            await message.answer('Something went wrong, use the buttons', reply_markup=mks.sing_buttons)
 
 
 @dp.message_handler(commands=['menu'])
@@ -244,7 +262,7 @@ async def options_handler(message: Message):
             msg_id = message.message_id
             user_msg = message.text
             logging.info(f'{user_id=}, {msg_id=}, {user_msg=}')
-            await message.answer('Select from the menu:', reply_markup=mks.create_keyboard_inline())
+            await message.answer('Select from the menu:', reply_markup=await mks.create_keyboard_inline())
         else:
             await message.answer('You are not authenticated', reply_markup=mks.sing_buttons)
     else:
@@ -329,7 +347,7 @@ async def callback_options(query: CallbackQuery):
             await bot.send_message(chat_id=query.message.chat.id, text=result)
             logging.info(f'{user_id=}, {data} have been sent')
             await bot.send_message(chat_id=query.message.chat.id, text=f'{MSG.format(user_name)}:',
-                                   reply_markup=mks.create_keyboard_my_tasks())
+                                   reply_markup=await mks.create_keyboard_my_tasks())
             bot_users_change[user_id] = dict({'task_id': task_using[5:]})
 
     elif data == 'change status':
@@ -353,7 +371,7 @@ async def callback_options(query: CallbackQuery):
         else:
             await bot.edit_message_text(chat_id=user_id, message_id=msg_id,
                                         text=f'confirm changes: status -> {data}',
-                                        reply_markup=mks.create_keyboard_to_status())
+                                        reply_markup=await mks.create_keyboard_to_status())
             logging.info(f'{user_id=}, message: Selected status to change')
             bot_users_change[user_id].update({'status': status})
 
@@ -369,32 +387,47 @@ async def callback_options(query: CallbackQuery):
             access_token = bot_users_online[user_id]['access_token']
             user_tasks_id = int(*(list(bot_users_tasks[user_id].keys())))
             response_change = task_change(task_id_to_change, status_to_change, access_token)
-            logging.info(f'{user_id=}, message: Request to change task status')
-            if response_change.status_code == 200:
-                response_tasks = tasks_load(access_token)
-                if response_tasks.status_code == 200:
-                    logging.info(f'{user_id=}, Data updated successfully')
-                    response_list = response_tasks.json()
-                    download = descr_load(response_list, user_tasks_id)
-                    logging.info(f'{user_id=}, Loaded info: {response_list}')
-                    logging.info(f'{user_id=}, Descriptions loaded successfully')
-                    bot_users_tasks[user_id][user_tasks_id].update(download)
-                    await bot.edit_message_text(chat_id=user_id, message_id=msg_id,
-                                                text='Data updated successfully',
-                                                reply_markup=None)
-                else:
-                    logging.info(f'{user_id=}, Error: {response_tasks.status_code}')
-                    await bot.edit_message_text(chat_id=user_id, message_id=msg_id,
-                                                text='Updated task data was not loaded',
-                                                reply_markup=None)
-                bot_users_change[user_id] = None
+            if response_change == None:
+                # Подключение не установлено:
+                logging.info(f'{user_id=}, error: ConnectionError')
                 await bot.edit_message_text(chat_id=user_id, message_id=msg_id,
-                                            text='Task status changed successfully',
-                                            reply_markup=mks.create_keyboard_inline())
-                logging.info(f'{user_id=}, message: Task status changed successfully')
+                                            text='Something went wrong, use the buttons',
+                                            reply_markup=None)
             else:
-                value = 'Something went wrong, try again'
-                await bot.send_message(chat_id=query.message.chat.id, text=value)
+                logging.info(f'{user_id=}, message: Request to change task status')
+                if response_change.status_code == 200:
+                    response_tasks = tasks_load(access_token)
+                    if response_tasks == None:
+                        # Подключение не установлено:
+                        logging.info(f'{user_id=}, error: ConnectionError')
+                        await bot.edit_message_text(chat_id=user_id, message_id=msg_id,
+                                            text='Something went wrong, use the buttons',
+                                            reply_markup=None)
+                    else:
+                        if response_tasks.status_code == 200:
+                            logging.info(f'{user_id=}, Data updated successfully')
+                            response_list = response_tasks.json()
+                            download = descr_load(response_list, user_tasks_id)
+                            logging.info(f'{user_id=}, Loaded info: {response_list}')
+                            logging.info(f'{user_id=}, Descriptions loaded successfully')
+                            bot_users_tasks[user_id][user_tasks_id].update(download)
+                            await bot.edit_message_text(chat_id=user_id, message_id=msg_id,
+                                                        text='Data updated successfully',
+                                                        reply_markup=None)
+                        else:
+                            logging.info(f'{user_id=}, Error: {response_tasks.status_code}')
+                            await bot.edit_message_text(chat_id=user_id, message_id=msg_id,
+                                                        text='Updated task data was not loaded',
+                                                        reply_markup=None)
+                    bot_users_change[user_id] = None
+                    await bot.edit_message_text(chat_id=user_id, message_id=msg_id,
+                                                text='Task status changed successfully',
+                                                reply_markup=await mks.create_keyboard_inline())
+                    logging.info(f'{user_id=}, message: Task status changed successfully')
+                else:
+                    logging.info(f'{user_id=}, Error: {response_change.status_code}')
+                    value = 'Something went wrong, try again...'
+                    await bot.send_message(chat_id=query.message.chat.id, text=value, reply_markup=None)
 
     elif data == 'cancel':
         if bot_users_tasks[user_id][user_id_for_tasks]['my'] == None:
@@ -406,7 +439,7 @@ async def callback_options(query: CallbackQuery):
             bot_users_change[user_id] = None
             await bot.edit_message_text(chat_id=user_id, message_id=msg_id,
                                         text='Select from the menu:',
-                                        reply_markup=mks.create_keyboard_inline())
+                                        reply_markup=await mks.create_keyboard_inline())
             logging.info(f'{user_id=}, message: Action canceled')
 
     else:
