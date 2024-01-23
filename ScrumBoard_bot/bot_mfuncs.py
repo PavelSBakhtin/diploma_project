@@ -34,6 +34,9 @@ def descr_load(response_list, user_tasks_id):
         if user_tasks_id == j['user'] and j['id'] not in tasks_my:
             tasks_my.update({f"task {j['id']}": f"Task id: { j['id']}\nFirst name: {j['user_first_name']}\nLast Name: {j['user_last_name']}\nUser id: {j['user']}\nDescription: {j['description']}\nStatus: {j['status']}"})
 
+    if not tasks_my:
+        tasks_my = None
+
     download = dict(all=tasks_all, my=tasks_my)
     return download
 
