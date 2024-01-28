@@ -210,7 +210,7 @@ async def password_text(message: Message, state: FSMContext):
     """
     if bot_users_online[user_id] == None:
         # Если аутентификация не удалась - загрузка данных пользователя не осуществляется:
-        pass
+        logging.info(f'{user_id=}, Data is not loading')
     else:
         if bot_users_online[user_id]['login_status'] == True:
             logging.info(f'{user_id=}, Data is loading...')

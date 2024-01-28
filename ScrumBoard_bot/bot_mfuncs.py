@@ -9,7 +9,7 @@ def sing_in(lgn, pswd):
         response_sing = requests.post(url, data_sing)
         return response_sing
     except requests.ConnectionError:
-        pass
+        return None
 
 
 def tasks_load(access_token):
@@ -19,7 +19,7 @@ def tasks_load(access_token):
         response_tasks = requests.get(url, access_token)
         return response_tasks
     except requests.ConnectionError:
-        pass
+        return None
 
 
 def descr_load(response_list, user_tasks_id):
@@ -51,4 +51,4 @@ def task_change(task_id_to_change, status_to_change, access_token):
         response_change = requests.put(url, result)
         return response_change
     except requests.ConnectionError:
-        pass
+        return None
